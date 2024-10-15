@@ -465,3 +465,82 @@ x opencorporates/us_mi/additional_identifiers.csv.gz
 x opencorporates/us_mi/non_reg_addresses.csv.gz
 x opencorporates/us_mi/alternative_names.csv.gz
 ```
+
+The headers of these files can be inspected using:
+
+```
+gzip -dc ~/data/opencorporates/us_mi/companies.csv.gz | head -n 5
+```
+
+Then create a new model in the `data_processing` dbt project, and run it with:
+
+```
+dbt run --select models/us_al_companies.sql
+```
+
+Verify the results with:
+```
+❯ duckdb -c "SELECT * FROM '~/data/opencorporates/us_al/companies.parquet' LIMIT 10;"
+┌────────────────┬───────────────────┬──────────────────────┬───┬──────────────────────┬──────────────────────┐
+│ company_number │ jurisdiction_code │         name         │ … │ latest_accounts_as…  │ latest_accounts_li…  │
+│    varchar     │      varchar      │       varchar        │   │    decimal(18,2)     │    decimal(18,2)     │
+├────────────────┼───────────────────┼──────────────────────┼───┼──────────────────────┼──────────────────────┤
+│ 000-000-001    │ us_al             │ A Bonding, Inc.      │ … │                      │                      │
+│ 000-000-002    │ us_al             │ Frank Dawson Realt…  │ … │                      │                      │
+```
+
+# Two letter state codes:
+
+```
+ak
+al
+ar
+az
+ca
+co
+ct
+dc
+de
+fl
+ga
+hi
+ia
+id
+il
+in
+ks
+ky
+la
+ma
+md
+me
+mi
+mn
+mo
+ms
+mt
+nc
+nd
+ne
+nh
+nj
+nm
+nv
+ny
+oh
+ok
+or
+pa
+ri
+sc
+sd
+tn
+tx
+ut
+va
+vt
+wa
+wi
+wv
+wy
+```
