@@ -10,7 +10,10 @@ WITH source_data AS (
     SELECT * FROM read_csv_auto('~/data/opencorporates/us_{{ state_code }}/companies.csv.gz',
                                 header=true,
                                 filename=true,
-                                compression='gzip')
+                                compression='gzip',
+                                types={'company_number': 'VARCHAR',
+                                       'registered_address.postal_code': 'VARCHAR',
+                                       'home_jurisdiction_company_number': 'VARCHAR'})
 )
 
 SELECT
