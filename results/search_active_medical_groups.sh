@@ -19,5 +19,9 @@ duckdb -c "COPY (
       AND current_status NOT ILIKE '%forfeited%'
       AND current_status NOT ILIKE '%cancelled%'
       AND current_status NOT ILIKE '%suspended%'
+      AND current_status NOT ILIKE '%merged out%'
+      AND current_status NOT ILIKE '%past due%'
+      AND current_status NOT ILIKE '%expired%'
+      AND current_status NOT ILIKE '%withdrawn%'
     LIMIT 10000
   ) TO 'active_medical_groups.csv' (HEADER, DELIMITER ',');"
